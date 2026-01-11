@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="ja" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お知らせ一覧 - 新町急行鉄道</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .menu-hover:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    .news-card {
+      transition: all 0.2s;
+      border-left: 4px solid transparent;
+    }
+    .news-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border-left-color: #2563eb;
+    }
+    .filter-btn {
+      transition: all 0.2s;
+    }
+    .filter-btn.active {
+      background-color: #2563eb;
+      color: white;
+    }
+    .archive-link {
+      transition: all 0.2s;
+    }
+    .archive-link:hover {
+      background-color: #f1f5f9;
+      padding-left: 1rem;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-gray-50">
+  <div class="min-h-full w-full"><!-- ヘッダー -->
+   <header id="main-header" class="bg-blue-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto"><!-- 上部バー -->
+     <div class="flex items-center justify-between px-4 py-2 border-b border-blue-800">
+      <div class="flex items-center gap-3"><!-- ロゴ -->
+       <div class="flex items-center gap-2">
+        <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#1e40af" stroke="white" stroke-width="2" /> <path d="M10 20h20M15 14l5 6-5 6M25 14l-5 6 5 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div>
+         <h1 id="company-name" class="text-xl font-bold tracking-wide">新町急行鉄道</h1>
+         <p class="text-xs text-blue-200">SHINMACHI EXPRESS RAILWAY</p>
+        </div>
+       </div>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-sm"><a href="#" class="hover:text-blue-200 transition">English</a> <a href="#" class="hover:text-blue-200 transition">お問い合わせ</a> <a href="#" class="hover:text-blue-200 transition">よくあるご質問</a>
+      </div>
+     </div><!-- ナビゲーション -->
+     <nav class="px-4">
+      <ul class="flex flex-wrap">
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">運行情報</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">時刻表・運賃</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">駅・路線図</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">きっぷ・定期券</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">おでかけ情報</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">企業情報</a></li>
+      </ul>
+     </nav>
+    </div>
+   </header><!-- パンくずリスト -->
+   <div class="bg-white border-b">
+    <div class="max-w-7xl mx-auto px-4 py-3">
+     <nav class="flex items-center gap-2 text-sm text-gray-600"><a href="#" class="hover:text-blue-600 transition">ホーム</a> <span>›</span> <span class="text-gray-900 font-medium">お知らせ一覧</span>
+     </nav>
+    </div>
+   </div><!-- ページヘッダー -->
+   <section class="bg-gradient-to-r from-blue-800 to-blue-900 text-white py-12">
+    <div class="max-w-7xl mx-auto px-4">
+     <div class="flex items-center gap-3 mb-3">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+      </svg>
+      <h2 id="page-title" class="text-3xl font-bold">お知らせ一覧</h2>
+     </div>
+     <p id="page-description" class="text-blue-200">新町急行鉄道からのお知らせをご覧いただけます</p>
+    </div>
+   </section><!-- メインコンテンツ -->
+   <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid lg:grid-cols-4 gap-8"><!-- 左側：お知らせ一覧 -->
+     <div class="lg:col-span-3"><!-- 検索とフィルター -->
+      <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+       <div class="flex flex-col md:flex-row gap-4 mb-4">
+        <div class="flex-1"><label for="search-input" class="block text-sm font-medium text-gray-700 mb-2">キーワード検索</label> <input type="text" id="search-input" placeholder="お知らせを検索..." class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div class="flex items-end"><button class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-2 rounded-lg transition"> 検索 </button>
+        </div>
+       </div><!-- カテゴリフィルター -->
+       <div>
+        <p class="text-sm font-medium text-gray-700 mb-2">カテゴリで絞り込む</p>
+        <div class="flex flex-wrap gap-2"><button class="filter-btn active px-4 py-2 rounded-full border border-gray-300 text-sm font-medium"> すべて </button> <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-100"> 重要 </button> <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-100"> 運行 </button> <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-100"> イベント </button> <button class="filter-btn px-4 py-2 rounded-full border border-gray-300 text-sm font-medium hover:bg-gray-100"> その他 </button>
+        </div>
+       </div>
+      </div><!-- お知らせリスト -->
+      <div id="news-list" class="space-y-4"><!-- お知らせカード1 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2024.01.15</span> <span class="inline-block bg-red-100 text-red-700 text-xs px-3 py-1 rounded-full font-medium">重要</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">ダイヤ改正のお知らせ（3月16日実施）</h3>
+         <p class="text-gray-600 text-sm">2024年3月16日（土）より、全線でダイヤ改正を実施いたします。詳細は本文をご確認ください。</p>
+        </div></a> <!-- お知らせカード2 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2024.01.10</span> <span class="inline-block bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">運行</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">年末年始の運行について</h3>
+         <p class="text-gray-600 text-sm">12月31日から1月3日までの運行時刻につきまして、特別ダイヤで運行いたします。</p>
+        </div></a> <!-- お知らせカード3 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2024.01.05</span> <span class="inline-block bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">イベント</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">「新町駅開業50周年記念フェア」開催のお知らせ</h3>
+         <p class="text-gray-600 text-sm">新町駅の開業50周年を記念して、2月1日から2月28日まで特別イベントを開催いたします。</p>
+        </div></a> <!-- お知らせカード4 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2024.01.03</span> <span class="inline-block bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">その他</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">ICカード「Soica」ポイントサービス開始について</h3>
+         <p class="text-gray-600 text-sm">2024年2月1日より、Soicaご利用でポイントが貯まる新サービスを開始いたします。</p>
+        </div></a> <!-- お知らせカード5 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.28</span> <span class="inline-block bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">運行</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">小野線の終電時刻変更について</h3>
+         <p class="text-gray-600 text-sm">1月15日より、小野線の終電時刻を15分繰り上げます。ご利用のお客様はご注意ください。</p>
+        </div></a> <!-- お知らせカード6 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.20</span> <span class="inline-block bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">イベント</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">冬の感謝祭キャンペーン実施中</h3>
+         <p class="text-gray-600 text-sm">12月1日から12月31日まで、対象区間の定期券購入で10%キャッシュバック。</p>
+        </div></a> <!-- お知らせカード7 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.15</span> <span class="inline-block bg-red-100 text-red-700 text-xs px-3 py-1 rounded-full font-medium">重要</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">川原駅リニューアル工事のお知らせ</h3>
+         <p class="text-gray-600 text-sm">2024年4月より川原駅のリニューアル工事を実施します。工事期間中の詳細をお知らせいたします。</p>
+        </div></a> <!-- お知らせカード8 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.10</span> <span class="inline-block bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full font-medium">その他</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">公式アプリバージョンアップのお知らせ</h3>
+         <p class="text-gray-600 text-sm">新町急行鉄道公式アプリをバージョン3.0にアップデートしました。新機能をご紹介します。</p>
+        </div></a> <!-- お知らせカード9 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.05</span> <span class="inline-block bg-blue-100 text-blue-700 text-xs px-3 py-1 rounded-full font-medium">運行</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">新町本線　朝の通勤ラッシュ時増便のお知らせ</h3>
+         <p class="text-gray-600 text-sm">通勤・通学時間帯の混雑緩和のため、平日朝7時台の新町本線を2本増便いたします。</p>
+        </div></a> <!-- お知らせカード10 --> <a href="#" class="news-card block bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="p-6">
+         <div class="flex items-start gap-4 mb-3"><span class="text-gray-500 text-sm whitespace-nowrap">2023.12.01</span> <span class="inline-block bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-medium">イベント</span>
+         </div>
+         <h3 class="text-lg font-bold text-gray-900 mb-2">鉄道の日記念スタンプラリー結果発表</h3>
+         <p class="text-gray-600 text-sm">10月に開催した鉄道の日記念スタンプラリーの結果と当選者を発表いたします。</p>
+        </div></a>
+      </div><!-- ページネーション -->
+      <div class="flex justify-center items-center gap-2 mt-8"><button class="px-3 py-2 border border-gray-300 rounded hover:bg-gray-100 transition" disabled>
+        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg></button> <button class="px-4 py-2 bg-blue-600 text-white rounded font-medium">1</button> <button class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition">2</button> <button class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition">3</button> <button class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition">4</button> <span class="px-2 text-gray-500">...</span> <button class="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition">10</button> <button class="px-3 py-2 border border-gray-300 rounded hover:bg-gray-100 transition">
+        <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg></button>
+      </div>
+     </div><!-- 右側：サイドバー -->
+     <div class="space-y-6"><!-- 月別アーカイブ -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-blue-900 text-white px-4 py-3">
+        <h3 class="font-bold">月別アーカイブ</h3>
+       </div>
+       <div class="p-4">
+        <ul class="space-y-2">
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2024年1月 (4)</a></li>
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2023年12月 (6)</a></li>
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2023年11月 (8)</a></li>
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2023年10月 (5)</a></li>
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2023年9月 (7)</a></li>
+         <li><a href="#" class="archive-link block text-gray-700 hover:text-blue-600 py-1">2023年8月 (4)</a></li>
+        </ul>
+       </div>
+      </div><!-- カテゴリ別件数 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-blue-900 text-white px-4 py-3">
+        <h3 class="font-bold">カテゴリ別</h3>
+       </div>
+       <div class="p-4">
+        <ul class="space-y-3">
+         <li class="flex items-center justify-between"><span class="flex items-center gap-2"> <span class="w-3 h-3 rounded-full bg-red-500"></span> <span class="text-gray-700">重要</span> </span> <span class="text-gray-500 text-sm">12件</span></li>
+         <li class="flex items-center justify-between"><span class="flex items-center gap-2"> <span class="w-3 h-3 rounded-full bg-blue-500"></span> <span class="text-gray-700">運行</span> </span> <span class="text-gray-500 text-sm">28件</span></li>
+         <li class="flex items-center justify-between"><span class="flex items-center gap-2"> <span class="w-3 h-3 rounded-full bg-green-500"></span> <span class="text-gray-700">イベント</span> </span> <span class="text-gray-500 text-sm">15件</span></li>
+         <li class="flex items-center justify-between"><span class="flex items-center gap-2"> <span class="w-3 h-3 rounded-full bg-gray-500"></span> <span class="text-gray-700">その他</span> </span> <span class="text-gray-500 text-sm">19件</span></li>
+        </ul>
+       </div>
+      </div><!-- クイックリンク -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-blue-900 text-white px-4 py-3">
+        <h3 class="font-bold">関連リンク</h3>
+       </div>
+       <div class="p-4 space-y-2"><a href="#" class="block text-blue-600 hover:text-blue-800 transition text-sm">運行情報</a> <a href="#" class="block text-blue-600 hover:text-blue-800 transition text-sm">時刻表検索</a> <a href="#" class="block text-blue-600 hover:text-blue-800 transition text-sm">路線図</a> <a href="#" class="block text-blue-600 hover:text-blue-800 transition text-sm">よくあるご質問</a> <a href="#" class="block text-blue-600 hover:text-blue-800 transition text-sm">お問い合わせ</a>
+       </div>
+      </div><!-- RSSフィード -->
+      <div class="bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg p-4">
+       <div class="flex items-center gap-2 mb-2">
+        <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19 7.38 20 6.18 20C5 20 4 19 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z" />
+        </svg>
+        <h3 class="font-bold">RSSフィード</h3>
+       </div>
+       <p class="text-sm text-orange-100 mb-3">最新のお知らせを購読</p><a href="#" class="inline-block bg-white text-orange-600 px-4 py-2 rounded font-medium text-sm hover:bg-orange-50 transition"> 購読する </a>
+      </div>
+     </div>
+    </div>
+   </main><!-- フッター -->
+   <footer class="bg-gray-800 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+       <h4 class="font-bold mb-4">運行情報</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">列車運行情報</a></li>
+        <li><a href="#" class="hover:text-white transition">振替輸送のご案内</a></li>
+        <li><a href="#" class="hover:text-white transition">遅延証明書</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">きっぷ・乗車券</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">運賃・料金</a></li>
+        <li><a href="#" class="hover:text-white transition">定期券</a></li>
+        <li><a href="#" class="hover:text-white transition">おトクなきっぷ</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">駅・施設</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">駅情報</a></li>
+        <li><a href="#" class="hover:text-white transition">バリアフリー設備</a></li>
+        <li><a href="#" class="hover:text-white transition">駅ナカ・駅チカ施設</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">企業情報</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">会社概要</a></li>
+        <li><a href="#" class="hover:text-white transition">採用情報</a></li>
+        <li><a href="#" class="hover:text-white transition">お問い合わせ</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+       <svg width="30" height="30" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#1e40af" stroke="white" stroke-width="2" /> <path d="M10 20h20M15 14l5 6-5 6M25 14l-5 6 5 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg><span id="footer-company-name" class="font-bold">新町急行鉄道</span>
+      </div>
+      <p class="text-gray-400 text-sm">© 2024 Shinmachi Express Railway Co., Ltd. All Rights Reserved.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      company_name: '新町急行鉄道',
+      page_title: 'お知らせ一覧',
+      page_description: '新町急行鉄道からのお知らせをご覧いただけます',
+      primary_color: '#1e3a8a',
+      secondary_color: '#ffffff',
+      text_color: '#1f2937'
+    };
+
+    async function onConfigChange(config) {
+      const companyName = config.company_name || defaultConfig.company_name;
+      const pageTitle = config.page_title || defaultConfig.page_title;
+      const pageDescription = config.page_description || defaultConfig.page_description;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+
+      document.getElementById('company-name').textContent = companyName;
+      document.getElementById('footer-company-name').textContent = companyName;
+      document.getElementById('page-title').textContent = pageTitle;
+      document.getElementById('page-description').textContent = pageDescription;
+
+      document.getElementById('main-header').style.backgroundColor = primaryColor;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['company_name', config.company_name || defaultConfig.company_name],
+        ['page_title', config.page_title || defaultConfig.page_title],
+        ['page_description', config.page_description || defaultConfig.page_description]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // フィルターボタンの動作
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bc3b5df5593354b',t:'MTc2ODEyNzEyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
