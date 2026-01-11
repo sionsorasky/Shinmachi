@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="ja" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新町高速鉄道</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    .menu-hover:hover {
+      background-color: rgba(255,255,255,0.1);
+    }
+    .card-hover {
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+    .news-item {
+      border-left: 3px solid #1e40af;
+      transition: background-color 0.2s;
+    }
+    .news-item:hover {
+      background-color: #f8fafc;
+    }
+    .train-animation {
+      animation: train-move 20s linear infinite;
+    }
+    @keyframes train-move {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(200%); }
+    }
+    .pulse-dot {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-gray-50">
+  <div class="min-h-full w-full"><!-- ヘッダー -->
+   <header id="main-header" class="bg-blue-900 text-white shadow-lg">
+    <div class="max-w-7xl mx-auto"><!-- 上部バー -->
+     <div class="flex items-center justify-between px-4 py-2 border-b border-blue-800">
+      <div class="flex items-center gap-3"><!-- ロゴ -->
+       <div class="flex items-center gap-2">
+        <svg width="40" height="40" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#1e40af" stroke="white" stroke-width="2" /> <path d="M10 20h20M15 14l5 6-5 6M25 14l-5 6 5 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <div>
+         <h1 id="company-name" class="text-xl font-bold tracking-wide">新町急行鉄道</h1>
+         <p class="text-xs text-blue-200">SHINMACHI EXPRESS RAILWAY</p>
+        </div>
+       </div>
+      </div>
+      <div class="hidden md:flex items-center gap-4 text-sm"><a href="#" class="hover:text-blue-200 transition">English</a> <a href="#" class="hover:text-blue-200 transition">お問い合わせ</a> <a href="#" class="hover:text-blue-200 transition">よくあるご質問</a>
+      </div>
+     </div><!-- ナビゲーション -->
+     <nav class="px-4">
+      <ul class="flex flex-wrap">
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">運行情報</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">時刻表・運賃</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">駅・路線図</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">きっぷ・定期券</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">おでかけ情報</a></li>
+       <li><a href="#" class="block px-4 py-3 menu-hover transition font-medium">企業情報</a></li>
+      </ul>
+     </nav>
+    </div>
+   </header><!-- 運行情報バナー -->
+   <div class="bg-green-600 text-white py-2 px-4">
+    <div class="max-w-7xl mx-auto flex items-center gap-3"><span class="pulse-dot inline-block w-3 h-3 bg-white rounded-full"></span> <span class="font-medium">運行情報</span> <span class="text-green-100">|</span> <span>現在、全線で平常運転しています</span> <span class="ml-auto text-sm text-green-200">最終更新: 10:30</span>
+    </div>
+   </div><!-- ヒーローセクション -->
+   <section class="relative bg-gradient-to-br from-blue-800 to-blue-900 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+     <div class="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/20 to-transparent"></div><!-- 電車のイラスト（アニメーション��� -->
+     <div class="train-animation absolute bottom-8 w-32">
+      <svg viewbox="0 0 120 40" fill="currentColor"><rect x="5" y="10" width="90" height="25" rx="5" fill="white" /> <rect x="10" y="15" width="15" height="12" rx="2" fill="#3b82f6" /> <rect x="30" y="15" width="15" height="12" rx="2" fill="#3b82f6" /> <rect x="50" y="15" width="15" height="12" rx="2" fill="#3b82f6" /> <rect x="70" y="15" width="15" height="12" rx="2" fill="#3b82f6" /> <circle cx="20" cy="35" r="5" fill="#374151" /> <circle cx="75" cy="35" r="5" fill="#374151" /> <rect x="95" y="12" width="20" height="20" rx="3" fill="white" />
+      </svg>
+     </div>
+    </div>
+    <div class="relative max-w-7xl mx-auto px-4 py-16">
+     <h2 id="hero-title" class="text-3xl md:text-4xl font-bold mb-4">街と街をつなぐ、心をつなぐ</h2>
+     <p class="text-blue-200 text-lg mb-8">安全・快適・便利な鉄道サービスをお届けします</p><!-- 検索ボックス -->
+     <div class="bg-white rounded-lg shadow-xl p-6 max-w-2xl">
+      <h3 class="text-gray-800 font-bold mb-4">乗換・運賃検索</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div><label class="block text-gray-600 text-sm mb-1">出発駅</label> <input type="text" placeholder="駅名を入力" class="w-full border border-gray-300 rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+       </div>
+       <div><label class="block text-gray-600 text-sm mb-1">到着駅</label> <input type="text" placeholder="駅名を入力" class="w-full border border-gray-300 rounded px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+       </div>
+      </div><button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-medium px-8 py-2 rounded transition w-full md:w-auto">検索する</button>
+     </div>
+    </div>
+   </section><!-- メインコンテンツ -->
+   <main class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid lg:grid-cols-3 gap-8"><!-- 左側：お知らせ -->
+     <div class="lg:col-span-2">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-blue-900 text-white px-6 py-3 flex items-center justify-between">
+        <h3 class="font-bold flex items-center gap-2">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+         </svg> お知らせ</h3><a href="#" class="text-sm text-blue-200 hover:text-white transition">一覧を見る →</a>
+       </div>
+       <div class="divide-y divide-gray-100"><a href="#" class="news-item block px-6 py-4">
+         <div class="flex items-start gap-4"><span class="text-sm text-gray-500 whitespace-nowrap">2024.01.15</span> <span class="inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded">重要</span>
+          <p id="news-1" class="text-gray-800">ダイヤ改正のお知らせ（3月16日実施）</p>
+         </div></a> <a href="#" class="news-item block px-6 py-4">
+         <div class="flex items-start gap-4"><span class="text-sm text-gray-500 whitespace-nowrap">2024.01.10</span> <span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">運行</span>
+          <p id="news-2" class="text-gray-800">年末年始の運行について</p>
+         </div></a> <a href="#" class="news-item block px-6 py-4">
+         <div class="flex items-start gap-4"><span class="text-sm text-gray-500 whitespace-nowrap">2024.01.05</span> <span class="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded">イベント</span>
+          <p class="text-gray-800">「新町駅開業50周年記念フェア」開催のお知らせ</p>
+         </div></a> <a href="#" class="news-item block px-6 py-4">
+         <div class="flex items-start gap-4"><span class="text-sm text-gray-500 whitespace-nowrap">2024.01.03</span> <span class="inline-block bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">その他</span>
+          <p class="text-gray-800">ICカード「Soica」ポイントサービス開始について</p>
+         </div></a>
+       </div>
+      </div><!-- クイックメニュー -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"><a href="#" class="card-hover bg-white rounded-lg shadow-md p-6 text-center">
+        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+         <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+         </svg>
+        </div><p class="font-medium text-gray-800">時刻表</p></a> <a href="#" class="card-hover bg-white rounded-lg shadow-md p-6 text-center">
+        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+         <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+         </svg>
+        </div><p class="font-medium text-gray-800">路線図</p></a> <a href="#" class="card-hover bg-white rounded-lg shadow-md p-6 text-center">
+        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+         <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+         </svg>
+        </div><p class="font-medium text-gray-800">きっぷ</p></a> <a href="#" class="card-hover bg-white rounded-lg shadow-md p-6 text-center">
+        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+         <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+         </svg>
+        </div><p class="font-medium text-gray-800">定期券</p></a>
+      </div>
+     </div><!-- 右側：サイドバー -->
+     <div class="space-y-6"><!-- 路線案内 -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-blue-900 text-white px-4 py-3">
+        <h3 class="font-bold">路線案内</h3>
+       </div>
+       <div class="p-4 space-y-3">
+        <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg"><span class="w-4 h-4 rounded-full bg-blue-600"></span> <span class="font-medium text-gray-800">新町本線</span> <span class="ml-auto text-sm text-gray-500">小野新町〜万代</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg"><span class="w-4 h-4 rounded-full bg-green-600"></span> <span class="font-medium text-gray-800">小野線</span> <span class="ml-auto text-sm text-gray-500">小野〜西京</span>
+        </div>
+        <div class="flex items-center gap-3 p-3 bg-orange-50 rounded-lg"><span class="w-4 h-4 rounded-full bg-orange-500"></span> <span class="font-medium text-gray-800">川原線</span> <span class="ml-auto text-sm text-gray-500">築来〜川原</span>
+        </div>
+       </div>
+      </div><!-- おすすめきっぷ -->
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+       <div class="bg-orange-500 text-white px-4 py-3">
+        <h3 class="font-bold">おすすめきっぷ</h3>
+       </div>
+       <div class="p-4 space-y-3"><a href="#" class="block p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition"> <p class="font-medium text-gray-800">一日乗車券</p><p class="text-sm text-gray-500">全線乗り放題 ¥800</p></a> <a href="#" class="block p-3 border border-gray-200 rounded-lg hover:border-orange-300 hover:bg-orange-50 transition"> <p class="font-medium text-gray-800">週末フリーパス</p><p class="text-sm text-gray-500">土日祝限定 ¥1,200</p></a>
+       </div>
+      </div><!-- バナー -->
+      <div class="space-y-4"><a href="#" class="block bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg p-4 card-hover"> <p class="font-bold">Soica</p><p class="text-sm text-blue-200">便利なICカード</p></a> <a href="#" class="block bg-gradient-to-r from-green-600 to-green-800 text-white rounded-lg p-4 card-hover"> <p class="font-bold">忘れ物について</p><p class="text-sm text-green-200">お問い合わせはこちら</p></a>
+      </div>
+     </div>
+    </div>
+   </main><!-- フッター -->
+   <footer class="bg-gray-800 text-white mt-12">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+     <div class="grid md:grid-cols-4 gap-8 mb-8">
+      <div>
+       <h4 class="font-bold mb-4">運行情報</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">列車運行情報</a></li>
+        <li><a href="#" class="hover:text-white transition">振替輸送のご案内</a></li>
+        <li><a href="#" class="hover:text-white transition">遅延証明書</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">きっぷ・乗車券</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">運賃・料金</a></li>
+        <li><a href="#" class="hover:text-white transition">定期券</a></li>
+        <li><a href="#" class="hover:text-white transition">おトクなきっぷ</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">駅・施設</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">駅情報</a></li>
+        <li><a href="#" class="hover:text-white transition">バリアフリー設備</a></li>
+        <li><a href="#" class="hover:text-white transition">駅ナカ・駅チカ施設</a></li>
+       </ul>
+      </div>
+      <div>
+       <h4 class="font-bold mb-4">企業情報</h4>
+       <ul class="space-y-2 text-gray-400 text-sm">
+        <li><a href="#" class="hover:text-white transition">会社概要</a></li>
+        <li><a href="#" class="hover:text-white transition">採用情報</a></li>
+        <li><a href="#" class="hover:text-white transition">お問い合わせ</a></li>
+       </ul>
+      </div>
+     </div>
+     <div class="border-t border-gray-700 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+       <svg width="30" height="30" viewbox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" fill="#1e40af" stroke="white" stroke-width="2" /> <path d="M10 20h20M15 14l5 6-5 6M25 14l-5 6 5 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+       </svg><span id="footer-company-name" class="font-bold">新町急行鉄道</span>
+      </div>
+      <p class="text-gray-400 text-sm">© 2024 Shinmachi Express Railway Co., Ltd. All Rights Reserved.</p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      company_name: 'Shinmachi Express Railway',
+      hero_title: '街と街をつなぐ、心をつなぐ',
+      news_1: 'ダイヤ改正のお知らせ（3月16日実施）',
+      news_2: '年末年始の運行について',
+      primary_color: '#1e3a8a',
+      secondary_color: '#ffffff',
+      text_color: '#1f2937',
+      accent_color: '#2563eb',
+      highlight_color: '#16a34a'
+    };
+
+    async function onConfigChange(config) {
+      const companyName = config.company_name || defaultConfig.company_name;
+      const heroTitle = config.hero_title || defaultConfig.hero_title;
+      const news1 = config.news_1 || defaultConfig.news_1;
+      const news2 = config.news_2 || defaultConfig.news_2;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const highlightColor = config.highlight_color || defaultConfig.highlight_color;
+
+      document.getElementById('company-name').textContent = companyName;
+      document.getElementById('footer-company-name').textContent = companyName;
+      document.getElementById('hero-title').textContent = heroTitle;
+      document.getElementById('news-1').textContent = news1;
+      document.getElementById('news-2').textContent = news2;
+
+      document.getElementById('main-header').style.backgroundColor = primaryColor;
+      document.querySelectorAll('.bg-white').forEach(el => {
+        el.style.backgroundColor = secondaryColor;
+      });
+      document.querySelectorAll('.text-gray-800').forEach(el => {
+        el.style.color = textColor;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.highlight_color || defaultConfig.highlight_color,
+            set: (value) => {
+              config.highlight_color = value;
+              window.elementSdk.setConfig({ highlight_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['company_name', config.company_name || defaultConfig.company_name],
+        ['hero_title', config.hero_title || defaultConfig.hero_title],
+        ['news_1', config.news_1 || defaultConfig.news_1],
+        ['news_2', config.news_2 || defaultConfig.news_2]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9bc3a15fe65df2d6',t:'MTc2ODEyNjI5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
